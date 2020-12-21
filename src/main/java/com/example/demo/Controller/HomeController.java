@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.List;
 
 @Controller
@@ -32,21 +31,21 @@ public class HomeController {
         return "Home/index";
     }
 
-    //Method for creating a student.
+    //Mapping for creating a student.
     @PostMapping("/createStudent")
     public String createStudent(@ModelAttribute Student s) {
         studentService.save(s);
         return "redirect:/";
     }
 
-    //method for updating students
+    //Mapping for updating students
     @PostMapping("/updateStudent")
     public String updateStudent(@ModelAttribute Student s){
         studentService.update(s);
         return "redirect:/";
     }
 
-    //Method for deleting students
+    //Mapping for deleting students
     @GetMapping("/deleteStudent/{id}")
     public String deleteStudent(@PathVariable("id") long id){
         studentService.deleteById(id);
