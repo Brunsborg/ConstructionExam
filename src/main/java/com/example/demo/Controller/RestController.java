@@ -18,40 +18,32 @@ public class RestController {
         this.supervisorRepository = supervisorRepository;
     }
 
-
-    // HTTP Get List
     @GetMapping("/Student")
     public Iterable<Student> findAll(){
 
-        // find all recipes
         return studentRepository.findAll();
     }
 
-    // HTTP Get by ID
     @GetMapping("/Student/{id}")
     public ResponseEntity<Optional<Student>> findById(@PathVariable Long id){
         Optional<Student> recipe = studentRepository.findById(id);
         if(recipe.isPresent()){
-            return ResponseEntity.status(200).body(recipe); // OK
+            return ResponseEntity.status(200).body(recipe);
         } else {
-            return ResponseEntity.status(404).body(recipe); // Not found
+            return ResponseEntity.status(404).body(recipe);
         }
     }
 
-    // HTTP Post, ie. create
     @CrossOrigin(origins = "*", exposedHeaders = "Location")
-    @PostMapping(value="/recipe", consumes={"application/json"})
+    @PostMapping(value="/Student", consumes={"application/json"})
     public ResponseEntity<String> create(@RequestBody Student s){
-        Student student = new Student(s.getId(), s.getName(), s.getEmail(), s.getSupervisor());
-        //gem recipe, så der er et id tilknyttet til den nye opskrift til mapning i modsat regning
+        Student student = new Student(s.getId(), s.getName(), s.getEmail());
         student.setSupervisor(s.getSupervisor());
-        //skal den gemmes igen?
         studentRepository.save(student);
 
         return ResponseEntity.status(201).header("Location", "/recipe/" + s.getId()).body("{'Msg': 'post created'}");
     }
 
-    // HTTP PUT, ie. update
     @PutMapping("/recipe/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Student s){
         //get recipeById

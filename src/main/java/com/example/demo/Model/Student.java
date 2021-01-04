@@ -24,6 +24,12 @@ private Supervisor supervisor;
     public Student() {
     }
 
+    public Student(long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
     public Student(long id, String name, String email, Supervisor supervisor) {
         this.id = id;
         this.name = name;
