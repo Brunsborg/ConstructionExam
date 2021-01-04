@@ -62,6 +62,7 @@ private Supervisor supervisor;
     public void setSupervisor(Supervisor supervisor) {
         this.supervisor = supervisor;
     }
+
     @Override
     public String toString() {
         return "name='" + name + '\'' +
