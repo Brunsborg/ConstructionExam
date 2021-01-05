@@ -24,7 +24,7 @@ public class RestController {
         return studentRepository.findAll();
     }
 
-    @GetMapping("/Student/{id}")
+    @GetMapping("/Student")
     public ResponseEntity<Optional<Student>> findById(@PathVariable Long id){
         Optional<Student> students = studentRepository.findById(id);
         if(students.isPresent()){
@@ -44,7 +44,7 @@ public class RestController {
         return ResponseEntity.status(201).header("Location", "/student/" + s.getId()).body("{'Msg': 'post created'}");
     }
 
-    @PutMapping("/student/{id}")
+    @PutMapping("/student")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Student s){
         Optional<Student> optionalStudent = studentRepository.findById(id);
         if (!optionalStudent.isPresent()){
@@ -56,7 +56,7 @@ public class RestController {
     }
 
 
-    @DeleteMapping("/student/{id}")
+    @DeleteMapping("/student")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         Optional<Student> students = studentRepository.findById(id);
         if (!students.isPresent()) {
