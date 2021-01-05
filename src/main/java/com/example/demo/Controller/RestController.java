@@ -26,11 +26,11 @@ public class RestController {
 
     @GetMapping("/Student/{id}")
     public ResponseEntity<Optional<Student>> findById(@PathVariable Long id){
-        Optional<Student> recipe = studentRepository.findById(id);
-        if(recipe.isPresent()){
-            return ResponseEntity.status(200).body(recipe);
+        Optional<Student> students = studentRepository.findById(id);
+        if(students.isPresent()){
+            return ResponseEntity.status(200).body(students);
         } else {
-            return ResponseEntity.status(404).body(recipe);
+            return ResponseEntity.status(404).body(students);
         }
     }
 
@@ -41,31 +41,26 @@ public class RestController {
         student.setSupervisor(s.getSupervisor());
         studentRepository.save(student);
 
-        return ResponseEntity.status(201).header("Location", "/recipe/" + s.getId()).body("{'Msg': 'post created'}");
+        return ResponseEntity.status(201).header("Location", "/student/" + s.getId()).body("{'Msg': 'post created'}");
     }
 
-    @PutMapping("/recipe/{id}")
+    @PutMapping("/student/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Student s){
-        //get recipeById
-        Optional<Student> optionalRecipe = studentRepository.findById(id);
-        if (!optionalRecipe.isPresent()){
-            //Recipe id findes ikke
+        Optional<Student> optionalStudent = studentRepository.findById(id);
+        if (!optionalStudent.isPresent()){
             return ResponseEntity.status(404).body("{'msg':'Not found'");
         }
 
-        //opdater category, ingredient og notes sker automatisk - nu er relationen oprettet
-        //save recipe
         studentRepository.save(s);
         return ResponseEntity.status(204).body("{'msg':'Updated'}");
     }
 
-    // HTTPDelete
-    @DeleteMapping("/recipe/{id}")
+
+    @DeleteMapping("/student/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         Optional<Student> students = studentRepository.findById(id);
-        //check at opskriften findes
         if (!students.isPresent()) {
-            return ResponseEntity.status(404).body("{'msg':'Not found'"); // Not found
+            return ResponseEntity.status(404).body("{'msg':'Not found'");
         }
         studentRepository.deleteById(id);
 

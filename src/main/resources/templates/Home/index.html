@@ -18,9 +18,11 @@
     </div>
 
     <!--Creates a drop-down menu for supervisors-->
-    <div>Supervisor: <select name="Supervisor">
+    <div>Supervisor:
+        <select name="Supervisor">
         <option th:each="Supervisor: ${supervisors}" th:text="${Supervisor.id}" th:value="${Supervisor.id}"></option>
-    </select></div>
+        </select>
+    </div>
 
     <div>
         <input type="submit" value="Add student" class="btn btn-success">
@@ -32,8 +34,7 @@
 
 <div>
     <table>
-        <thead class="thead-dark">
-            </thead>
+        <thead class="thead-dark"></thead>
                 <tbody>
                 <!--Looping all students into the table -->
                     <tr th:each="student: ${students}">
@@ -60,7 +61,7 @@
                                 <a th:href="@{'/deleteStudent/'+${student.id}}" class="btn btn-danger">Delete</a>
                             </td>
 
-                            </form>
+                        </form>
                     </tr>
                 </tbody>
     </table>
