@@ -44,22 +44,22 @@ public class RestController {
         return ResponseEntity.status(201).header("Location", "/student/" + s.getId()).body("{'post created'}");
     }
 
-    @PutMapping("/student/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Student s){
-        Optional<Student> optionalStudent = studentRepository.findById(id);
-        if (!optionalStudent.isPresent()){
+    @CrossOrigin(origins = "*", exposedHeaders = "Location")
+    @PutMapping(value="/Student", consumes={"application/json"})
+    public ResponseEntity<String> update(@RequestBody Student s){
+        Optional<Student> optionalStudent = studentRepository.findById(s.getId());
+        if (optionalStudent.isEmpty()){
             return ResponseEntity.status(404).body("{'Not found'}");
         }
-
         studentRepository.save(s);
         return ResponseEntity.status(204).body("{'Updated'}");
     }
 
 
-    @DeleteMapping("/student/{id}")
+    @DeleteMapping("/Student/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         Optional<Student> students = studentRepository.findById(id);
-        if (!students.isPresent()) {
+        if (students.isEmpty()) {
             return ResponseEntity.status(404).body("{'Not found'");
         }
         studentRepository.deleteById(id);
