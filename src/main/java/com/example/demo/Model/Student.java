@@ -19,7 +19,7 @@ public class Student {
 
     //Creates the relationship between students and supervisors.
     @ManyToOne
-private Supervisor supervisor;
+    private Supervisor supervisor;
 
     public Student() {
     }

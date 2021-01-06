@@ -20,7 +20,8 @@
     <!--Creates a drop-down menu for supervisors-->
     <div>Supervisor:
         <select name="Supervisor">
-        <option th:each="Supervisor: ${supervisors}" th:text="${Supervisor.id}" th:value="${Supervisor.id}"></option>
+            <option th:each="Supervisor: ${supervisors}" th:text="${Supervisor.id}"
+                    th:value="${Supervisor.id}"></option>
         </select>
     </div>
 
@@ -35,35 +36,35 @@
 <div>
     <table>
         <thead class="thead-dark"></thead>
-                <tbody>
-                <!--Looping all students into the table -->
-                    <tr th:each="student: ${students}">
-                        <!-- Creating a form for the update method-->
-                        <form action="/updateStudent" method="post">
+        <tbody>
+        <!--Looping all students into the table -->
+        <tr th:each="student: ${students}">
+            <!-- Creating a form for the update method-->
+            <form action="/updateStudent" method="post">
 
-                            <input type="number" name="id" th:value="${student.id}" hidden>
+                <input type="number" name="id" th:value="${student.id}" hidden>
 
-                            <td>Name:
-                            <input type="text" name="name" th:value="${student.name}">
-                            </td>
+                <td>Name:
+                    <input type="text" name="name" th:value="${student.name}">
+                </td>
 
-                            <td>E-mail:
-                                <input type="text" name="email" th:value="${student.email}">
-                            </td>
+                <td>E-mail:
+                    <input type="text" name="email" th:value="${student.email}">
+                </td>
 
-                            <td>Supervisor:
-                                <input type="text" name="supervisor" th:value="${student.supervisor}">
-                            </td>
+                <td>Supervisor:
+                    <input type="text" name="supervisor" th:value="${student.supervisor}">
+                </td>
 
-                            <td>
-                                <input type="submit" value="update" class="btn btn-info">
-                                <!--A link/reference to the delete method in the controller.-->
-                                <a th:href="@{'/deleteStudent/'+${student.id}}" class="btn btn-danger">Delete</a>
-                            </td>
+                <td>
+                    <input type="submit" value="update" class="btn btn-info">
+                    <!--A link/reference to the delete method in the controller.-->
+                    <a th:href="@{'/deleteStudent/'+${student.id}}" class="btn btn-danger">Delete</a>
+                </td>
 
-                        </form>
-                    </tr>
-                </tbody>
+            </form>
+        </tr>
+        </tbody>
     </table>
 </div>
 

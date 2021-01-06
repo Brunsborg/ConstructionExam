@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.List;
 
 @Controller
@@ -23,7 +24,7 @@ public class HomeController {
 
     //Creates a list of students and supervisors for use for the GUI.
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model) {
         List<Student> studentList = studentService.findAll();
         model.addAttribute("students", studentList);
         List<Supervisor> supervisorList = supervisorService.findAll();
@@ -40,14 +41,14 @@ public class HomeController {
 
     //Mapping for updating students
     @PostMapping("/updateStudent")
-    public String updateStudent(@ModelAttribute Student s){
+    public String updateStudent(@ModelAttribute Student s) {
         studentService.update(s);
         return "redirect:/";
     }
 
     //Mapping for deleting students
     @GetMapping("/deleteStudent/{id}")
-    public String deleteStudent(@PathVariable("id") long id){
+    public String deleteStudent(@PathVariable("id") long id) {
         studentService.deleteById(id);
         return "redirect:/";
     }

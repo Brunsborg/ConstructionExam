@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class SupervisorService {
 
@@ -15,18 +16,18 @@ public class SupervisorService {
     SupervisorRepository supervisorRepository;
 
     //Method for finding supervisor by their id.
-    public Supervisor findById(long id){
+    public Supervisor findById(long id) {
         Optional<Supervisor> optionalSupervisor = supervisorRepository.findById(id);
-        if(optionalSupervisor.isPresent()){
+        if (optionalSupervisor.isPresent()) {
             return optionalSupervisor.get();
-        }else
+        } else
             throw new RuntimeException();
     }
 
     //Creates a list of all supervisors.
-    public List<Supervisor> findAll(){
+    public List<Supervisor> findAll() {
         List<Supervisor> supervisors = new ArrayList<>();
-        for(Supervisor sv : supervisorRepository.findAll()){
+        for (Supervisor sv : supervisorRepository.findAll()) {
             supervisors.add(sv);
         }
         return supervisors;

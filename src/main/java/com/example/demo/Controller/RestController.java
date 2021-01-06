@@ -19,15 +19,15 @@ public class RestController {
     }
 
     @GetMapping("/Student")
-    public Iterable<Student> findAll(){
+    public Iterable<Student> findAll() {
 
         return studentRepository.findAll();
     }
 
     @GetMapping("/Student/{id}")
-    public ResponseEntity<Optional<Student>> findById(@PathVariable Long id){
+    public ResponseEntity<Optional<Student>> findById(@PathVariable Long id) {
         Optional<Student> students = studentRepository.findById(id);
-        if(students.isPresent()){
+        if (students.isPresent()) {
             return ResponseEntity.status(200).body(students);
         } else {
             return ResponseEntity.status(404).body(students);
@@ -35,8 +35,8 @@ public class RestController {
     }
 
     @CrossOrigin(origins = "*", exposedHeaders = "Location")
-    @PostMapping(value="/Student", consumes={"application/json"})
-    public ResponseEntity<String> create(@RequestBody Student s){
+    @PostMapping(value = "/Student", consumes = {"application/json"})
+    public ResponseEntity<String> create(@RequestBody Student s) {
         Student student = new Student(s.getId(), s.getName(), s.getEmail());
         student.setSupervisor(s.getSupervisor());
         studentRepository.save(student);
@@ -45,16 +45,15 @@ public class RestController {
     }
 
     @CrossOrigin(origins = "*", exposedHeaders = "Location")
-    @PutMapping(value="/Student", consumes={"application/json"})
-    public ResponseEntity<String> update(@RequestBody Student s){
+    @PutMapping(value = "/Student", consumes = {"application/json"})
+    public ResponseEntity<String> update(@RequestBody Student s) {
         Optional<Student> optionalStudent = studentRepository.findById(s.getId());
-        if (optionalStudent.isEmpty()){
+        if (optionalStudent.isEmpty()) {
             return ResponseEntity.status(404).body("{'Not found'}");
         }
         studentRepository.save(s);
         return ResponseEntity.status(204).body("{'Updated'}");
     }
-
 
     @DeleteMapping("/Student/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
