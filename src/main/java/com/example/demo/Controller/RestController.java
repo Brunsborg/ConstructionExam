@@ -24,7 +24,7 @@ public class RestController {
         return studentRepository.findAll();
     }
 
-    @GetMapping("/Student")
+    @GetMapping("/Student/{id}")
     public ResponseEntity<Optional<Student>> findById(@PathVariable Long id){
         Optional<Student> students = studentRepository.findById(id);
         if(students.isPresent()){
@@ -41,29 +41,29 @@ public class RestController {
         student.setSupervisor(s.getSupervisor());
         studentRepository.save(student);
 
-        return ResponseEntity.status(201).header("Location", "/student/" + s.getId()).body("{'Msg': 'post created'}");
+        return ResponseEntity.status(201).header("Location", "/student/" + s.getId()).body("{'post created'}");
     }
 
-    @PutMapping("/student")
+    @PutMapping("/student/{id}")
     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Student s){
         Optional<Student> optionalStudent = studentRepository.findById(id);
         if (!optionalStudent.isPresent()){
-            return ResponseEntity.status(404).body("{'msg':'Not found'");
+            return ResponseEntity.status(404).body("{'Not found'}");
         }
 
         studentRepository.save(s);
-        return ResponseEntity.status(204).body("{'msg':'Updated'}");
+        return ResponseEntity.status(204).body("{'Updated'}");
     }
 
 
-    @DeleteMapping("/student")
+    @DeleteMapping("/student/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         Optional<Student> students = studentRepository.findById(id);
         if (!students.isPresent()) {
-            return ResponseEntity.status(404).body("{'msg':'Not found'");
+            return ResponseEntity.status(404).body("{'Not found'");
         }
         studentRepository.deleteById(id);
 
-        return ResponseEntity.status(200).body("{'msg':'Deleted'}");
+        return ResponseEntity.status(200).body("{'Deleted'}");
     }
 }
